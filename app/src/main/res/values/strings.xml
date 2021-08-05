@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ChangeFontScale</string>
+    <string name="open_setting">打开字体设置页</string>
+    <string name="text_name">这是测试字体大小的文本内容</string>
+</resources>
