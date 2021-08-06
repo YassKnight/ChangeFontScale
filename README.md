@@ -1,6 +1,10 @@
 
 #### 更改应用内全局字体大小控件
 
+## 样式截图
+
+![demo](https://github.com/YassKnight/ChangeFontScale/blob/master/resourceFile/c82y2-8crq9.gif)
+
 ## 快速使用
 
 Gradle
