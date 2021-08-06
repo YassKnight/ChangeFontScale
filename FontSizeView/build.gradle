@@ -1,7 +1,12 @@
 plugins {
     id 'com.android.library'
 }
-
+ext {
+    PUBLISH_GROUP_ID = "com.github.YassKnight"        //项目包名
+    PUBLISH_ARTIFACT_ID = 'changefontscale'            //项目名
+    PUBLISH_VERSION = "1.0.0"                    //版本号
+}
+apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
 android {
     compileSdk 30
 
@@ -9,10 +14,8 @@ android {
         minSdk 21
         targetSdk 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -24,6 +27,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 

@@ -31,5 +31,7 @@ dependencies {
     // 组件库
     implementation 'ink.lodz:pandora:1.6.7'
 
-    implementation project(':FontSizeView')
+//    implementation project(':FontSizeView')
+
+    implementation 'com.github.YassKnight:changefontscale:1.0.0'
 }
