@@ -74,15 +74,7 @@ public class FontSizeView extends View {
     private float text1ScaleX;
     private float text2ScaleX;
 
-    private float fontSizeScale;
-
-    private Context mContext;
-
-    private int defaultPos;
-
-    private double fontSizeSp;
-
-    private static final String FONT_SCALE = "font_scale";
+    public static final String FONT_SCALE = "font_scale";
 
     public FontSizeView(Context context) {
         super(context);
@@ -105,7 +97,6 @@ public class FontSizeView extends View {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        this.mContext = context;
         // initDefault
         defaultLineWidth = DensityUtils.dp2px(context, 2);
         defaultCircleRadius = DensityUtils.dp2px(context, 35);
@@ -149,13 +140,6 @@ public class FontSizeView extends View {
         setLayerType(LAYER_TYPE_SOFTWARE, null);
         mCirclePaint.setShadowLayer(2, 0, 0, Color.rgb(33, 33, 33));
 
-        float scale = (float) SPUtils.get(mContext, FONT_SCALE, (Float)0.0f);
-        if (scale > 0.5) {
-            defaultPos = (int) ((scale - 0.875) / 0.125);
-        } else {
-            defaultPos = 1;
-        }
-        setDefaultPosition(defaultPos);
     }
 
     private void initCustomAttr(TypedArray typedArray) {
@@ -166,7 +150,7 @@ public class FontSizeView extends View {
         circleColor = typedArray.getColor(R.styleable.FontSizeView_circleColor, Color.WHITE);
         lineWidth = typedArray.getDimensionPixelSize(R.styleable.FontSizeView_lineWidth, defaultLineWidth);
         circleRadius = typedArray.getDimensionPixelSize(R.styleable.FontSizeView_circleRadius, defaultCircleRadius);
-        max = typedArray.getInteger(R.styleable.FontSizeView_totalCount, 5);
+        max = typedArray.getInteger(R.styleable.FontSizeView_totalCount, 4);
         textColor = typedArray.getColor(R.styleable.FontSizeView_textFontColor, textColor);
         smallSize = typedArray.getInteger(R.styleable.FontSizeView_smallSize, smallSize);
         standerSize = typedArray.getInteger(R.styleable.FontSizeView_standerSize, standerSize);
@@ -242,13 +226,8 @@ public class FontSizeView extends View {
                     currentX = points.get(currentProgress).x;
                     invalidate();
                 }
-                //根据position 获取字体倍数
-                fontSizeScale = (float) (0.875 + 0.125 * currentProgress);
-                //放大后的sp单位
-                fontSizeSp = fontSizeScale * (int) DensityUtils.px2sp(mContext, mContext.getResources().getDimensionPixelSize(R.dimen.sp_stander));
-                SPUtils.put(mContext, FONT_SCALE, fontSizeScale);
                 if (onChangeCallbackListener != null) {
-                    onChangeCallbackListener.onChangeListener(fontSizeScale, (int) fontSizeSp);
+                    onChangeCallbackListener.onChangeListener(currentProgress);
                 }
                 break;
         }
@@ -276,14 +255,14 @@ public class FontSizeView extends View {
     private OnChangeCallbackListener onChangeCallbackListener;
 
     public interface OnChangeCallbackListener {
-        void onChangeListener(float fontScale, int fontSizeSp);
+        void onChangeListener(int position);
     }
 
     public void setDefaultPosition(int position) {
         defaultPosition = position;
-//        if (onChangeCallbackListener != null) {
-//            onChangeCallbackListener.onChangeListener(fontSizeScale, (int) fontSizeSp);
-//        }
+        if (onChangeCallbackListener != null) {
+            onChangeCallbackListener.onChangeListener(position);
+        }
         invalidate();
     }
 

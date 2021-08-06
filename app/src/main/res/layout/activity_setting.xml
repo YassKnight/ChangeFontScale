@@ -21,14 +21,15 @@
     <com.yknight.fontsizeview.FontSizeView
         android:id="@+id/font_size_view"
         android:layout_width="match_parent"
-        android:textSize="16sp"
         android:layout_height="90dp"
         android:background="@color/white"
+        android:textSize="16sp"
         app:circleRadius="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:lineColor="@color/color_7f7f7f"
         app:standerSize="16"
-        app:totalCount="5"
+        app:totalCount="4"
         tools:layout_editor_absoluteX="-40dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
